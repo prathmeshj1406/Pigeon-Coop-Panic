@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pigeon Coop Panic</title><link rel="stylesheet" href="style.css"></head><body>
+<div id="sky"><i class="cloud"></i><i class="cloud c2"></i>
+<svg id="city" viewBox="0 0 1000 200" preserveAspectRatio="none"><g fill="#8fa6c9"><rect x="20" y="80" width="80" height="120"/><rect x="120" y="40" width="60" height="160"/><rect x="200" y="100" width="100" height="100"/><rect x="330" y="60" width="70" height="140"/><rect x="430" y="110" width="90" height="90"/><rect x="550" y="30" width="60" height="170"/><rect x="640" y="90" width="110" height="110"/><rect x="780" y="50" width="70" height="150"/><rect x="880" y="100" width="100" height="100"/></g><g fill="#ffe08a"><rect x="135" y="60" width="8" height="10"/><rect x="565" y="50" width="8" height="10"/><rect x="795" y="70" width="8" height="10"/><rect x="345" y="80" width="8" height="10"/></g></svg></div>
+
+<section id="menu" class="screen">
+  <h1 class="title">🐦 PIGEON COOP PANIC</h1><p class="sub">Keep the pigeons under control!</p>
+  <button class="btn" id="bPlay">▶ PLAY</button><button class="btn" data-go="levels">LEVELS</button>
+  <button class="btn" data-go="how">HOW TO PLAY</button><button class="btn" data-go="lab">MATH LAB</button>
+  <p id="hi" class="sub"></p>
+</section>
+
+<section id="levels" class="screen"><h1 class="title sm">LEVELS</h1><div id="lvg"></div><button class="btn" data-go="menu">← BACK</button></section>
+
+<section id="how" class="screen"><h1 class="title sm">HOW TO PLAY</h1>
+  <div class="grid">
+  <div class="card"><h3>🎯 Goal</h3>Pigeons keep arriving in the waiting area. Put <b>every</b> pigeon into a coop before <b>PANIC</b> reaches 100%.</div>
+  <div class="card"><h3>🖱 Controls</h3><ul><li>Click a pigeon, then click a coop.</li><li>Wrong move: the pigeon stays put, you get a message.</li><li>Click a pigeon <i>inside</i> a coop to send it back to the waiting area (+3 panic, combo resets, its points are taken back).</li></ul></div>
+  <div class="card"><h3>🐦 Pigeon types</h3><ul><li><b>Normal</b>: any ordinary coop.</li><li><b>Social 💬</b>: needs another pigeon already in the coop.</li><li><b>Angry 💢</b>: needs an empty coop and nobody may join it afterwards.</li><li><b>VIP 👑</b>: only the golden coop.</li><li><b>Twins 👯</b>: one pair that takes 2 spots in the same coop.</li></ul></div>
+  <div class="card"><h3>🏠 Coops</h3><ul><li>Each coop shows used / capacity. You cannot overfill it.</li><li>The golden coop is <b>reserved for VIPs</b>; nobody else can enter.</li><li>A closed coop (🚧) cannot be used until it reopens.</li></ul></div>
+  <div class="card"><h3>😱 Panic</h3><ul><li>Rises steadily while pigeons wait (more waiting = faster; later levels are faster). A full waiting area (7) adds extra.</li><li>Wrong move: +10. Placing a pigeon correctly: -4. Food Drop: -15.</li></ul></div>
+  <div class="card"><h3>⭐ Score, combo, stars</h3><ul><li>Correct placement = 10 × combo points. Combo goes up by 1 each time (max x8).</li><li>A wrong move or sending a pigeon back resets combo to x1.</li><li>Stars depend on panic left: over 65% = 3, over 35% = 2, otherwise 1.</li></ul></div>
+  <div class="card"><h3>⚡ Power-ups (per level)</h3><ul><li><b>Feather Freeze</b> (1): panic stops for 6 s.</li><li><b>Extra Coop</b> (1): adds an ordinary coop with capacity 3.</li><li><b>Math Hint</b> (2): shows the Pigeonhole minimum for all pigeons and your current coops.</li></ul></div>
+  <div class="card"><h3>🎲 Random events (from level 3)</h3>Every 18-28 s: <b>Pigeon Rush</b> (2 extra arrive), <b>Coop Closed</b> (6 s), <b>Food Drop</b> (panic -15) or <b>Chaos</b> (panic rises 50% faster for 8 s).</div>
+  <div class="card"><h3>👑 Boss levels (5, 10, 15, 20)</h3><ul><li><b>5 Coop Overlord</b>: zero spare spots in the coops.</li><li><b>10 The Falcon</b>: every 12 s a coop closes for 5 s.</li><li><b>15 Pigeon King</b>: extra VIPs, and waiting VIPs raise panic twice as fast.</li><li><b>20 Final Panic</b>: falcon (every 16 s, 4 s closure) + impatient VIPs.</li></ul></div>
+  <div class="card"><h3>📐 Math, quizzes, Math Lab</h3><ul><li>Pigeonhole Principle: <b>n</b> pigeons in <b>k</b> coops means some coop holds at least <b>⌈n/k⌉</b>. Coop capacity in each level is built from it.</li><li><b>SHOW WHY</b> (level complete screen) shows the steps and a proof by contradiction.</li><li>Boss levels end with a <b>required</b> 3-question quiz. Other levels offer one <b>optional</b> practice question (+50 per correct answer).</li><li><b>Math Lab</b> (main menu): type any n and k and see the calculation.</li></ul></div>
+  </div>
+  <button class="btn" data-go="menu">← BACK</button></section>
+
+<section id="lab" class="screen"><h1 class="title sm">🧪 MATH LAB</h1>
+  <div class="card">Pigeons: <input id="labN" type="number" min="1" value="17"> Coops: <input id="labK" type="number" min="1" value="4">
+  <button class="btn" id="calc">CALCULATE</button><div id="labOut"></div></div>
+  <button class="btn" data-go="menu">← BACK</button></section>
+
+<section id="game" class="screen">
+  <header id="top"><b>LEVEL <span id="hL"></span></b><b>SCORE <span id="hS">0</span></b><b id="hC">COMBO x1</b>
+  <div id="pan"><b>PANIC</b><div class="bar"><div id="panF"></div></div><span id="panT"></span></div><button class="btn" id="quit">✕</button></header>
+  <div id="main"><div id="roof"><div id="coops"></div><div id="wait"></div></div>
+  <aside><h3>🎯 CURRENT OBJECTIVE</h3><p id="obj"></p><h3>🐦 PIGEON INFO</h3><p id="info"></p><h3>🏠 COOP STATUS</h3><p id="cst"></p><p id="evt"></p></aside></div>
+  <footer id="pw"><button data-p="freeze">❄ FEATHER FREEZE <i></i></button><button data-p="coop">🏠 EXTRA COOP <i></i></button><button data-p="hint">💡 MATH HINT <i></i></button></footer>
+</section>
+
+<div id="modal" class="hide"><div id="box"></div></div>
+<script src="math.js"></script><script src="levels.js"></script><script src="game.js"></script>
+</body></html>
